@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="dashboardParrent">
+    <div class="Dashboard_page">
+        <div class="dashboard_navbar">
+            <!-- <div class="main_logo">
+                <div><a href="#home">KI</a></div>
+                <div class="logo">
+                  <img src="img/nav.png" alt="">
+                </div>
+            </div> -->
+            <div class="Menu_list">
+                <ul>
+                    
+                    <li> <a href="">Blogs</a></li>
+                    <li> <a href="">Query</a></li>
+                    <li> <a href="">New post</a></li>
+                    <li> <a href="index.html">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <div  class="dashboardRight">
+            <div class="dashheader">
+                <div class="DashTittle"> 
+                    <div class="dash_text"> 
+                        <p>DASHBOARD</p>
+                    </div>
+                    <div class="menu_nav_img" id="nav_img" onclick="navimg('nav_menu')">
+                        <img src="img/nav_menuimg.png" alt="">
+                      </div>
+                </div>
+                <div>
+                    <div class="myprofile">
+                        <img src="img/1Download.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash_content">
+                <div class="Allblogs" id="allblog">
+                    <div class="Tittles">
+                    <p>All blogs</p>
+                    </div>
+                    <!-- <div class="singleBlog"> 
+                       <div class="imgBlog">
+                        <div class="imgBlog_1"><img src="../images/img/02.jfif " alt=""></div>
+                       </div>
+                       <div class="blog_details">
+                           <div class="BlogTittle">
+                            <div><p> <b>Review regional and global search volume</b></p></div>
+
+                           </div>
+                           <div class="Blogcontent">
+                            <div>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe et, exercitationem, suscipit obcaecati temporibus, dignissimos ex enim facere distinctio culpa quis deserunt! Dolorum eligendi numquam voluptatem quo quibusdam ratione consequuntur.</p>
+                            </div>
+                           </div>
+                           <div class="BlogButton">
+                            <div class="deletebutton">
+                                 <button> <a href="">Delete Item</a></button>
+                            </div>
+                            <div class="editbutton">
+                                <button><a href=""> Edit</a></button>  
+                            </div>
+                           
+                           </div>
+                       </div>
+                    </div>  -->
+                </div> 
+
+               <div class="Allqueries">
+                <div class="Tittles">
+                    <p>All queries</p>
+                </div>
+                   <div>
+                    <table class="table_table_bordered" id="query_crud_table">
+                      <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Message</th>
+                            <th>action</th>
+                        </tr>
+                        </thead>
+                         <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="queredit_update">
+                                <button class="querEditbutton" id="querEditbutton">Edit</button>
+                                <button class="querUpdatebutton" id="querUpdatebutton">Update</button>
+                            </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="queredit_update">
+                                    <button class="querEditbutton" id="querEditbutton">Edit</button>
+                                    <button class="querUpdatebutton" id="querUpdatebutton">Update</button>
+                                </div>
+                            </td>
+                        </tr>
+                         </tbody>
+                    </table>
+                    
+                   </div>
+               </div>
+               <div class="new_blog">
+                <div class="Tittles">
+                    <p> New Post</p>
+                </div>
+                   <div class="NewPost" id="postId">
+                    <div class="PostStyle">
+                        <div class="Form">
+                            <form action="">
+                                <div>
+                                    <input type="text" name="" id="blogname" placeholder="Blog Title ">
+                               </div>
+                               <div>
+                                  <textarea name="" id="bloginf" cols="30" rows="10" placeholder="Blog information "></textarea>
+                               </div>
+                               <div>
+                                <input type="file" name="" id="blogimgs" onchange="mypic()">
+                                <img src="" alt="" id="imgname">
+                               </div>
+                               <div>
+                                <button  id="btnId" onclick="insertBlog()">Send post</button>
+                               </div>
+                               <div class="cancel_updatebtn" id="cancel_updatebtn">
+                                <button id="Cancelbtn" class="Cancel cancelbttn" data-click="false">Cancel</button>
+                                <button id="Updatebtn" class=" Cancel updatebttn" data-click="false">Update</button>
+                               </div>
+                            </form>
+                        </div>
+                    </div>
+                   </div>
+               </div>
+
+            </div>
+        </div>
+     </div>
+     <div class="navbar_menu" id="nav_menu">
+        <ul>
+            <li>Home</li>
+            <li>Blogs</li>
+            <li>Query</li>
+            <li>New post</li>
+            <li> <a href="index.html">Logout</a></li>
+        </ul>
+     </div>
+     </div>
+     <script src="dashb.js"></script>
+</body>
+</html>

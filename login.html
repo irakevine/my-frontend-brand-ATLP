@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>Login</title>
+</head>
+<body>
+  <div class="Login_page">
+    <div class="login_center">
+      <form action="/action_page.php" method="post" class="FormLoginpage">
+        <div class="imgcontainer">
+          <img src="img/LOGOLOGIN.png" alt="Avatar" class="avatar">
+        </div>
+        <div class="login_container">
+          <div class="myinputs">
+            <div>
+              <label for="uname"><b>Email</b></label>
+              <input type="text" data-check="" id="email" onkeyup="emailvalidation()" onchange="emailvalidation()"
+                placeholder="Enter email" name="email" required>
+            </div>
+            <div>
+              <p id="email_error" class="error"></p>
+            </div>
+          </div>
+          <div class="myinputs">
+            <div>
+              <label for="psw"><b>Password</b></label>
+              <input type="password" data-check="" id="password" onkeyup="CheckPassword('password')"
+                placeholder="Enter Password" name="psw" required>
+            </div>
+            <div>
+              <p id="password_error" class="error"></p>
+            </div>
+          </div>
+          <button type="submit" id="btn_logo" class="buttonLogin">Login</button>
+          <div class="footerLogin">
+            <div>
+              <input type="checkbox" checked="checked" class="remember">
+              <label for="">Remember me</label>
+            </div>
+            <div>
+              <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="loginScript.js"></script>
+</body>
+
+</html>
