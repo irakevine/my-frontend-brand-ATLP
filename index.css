@@ -18,6 +18,15 @@ body {
   font-family: 'Poppins', sans-serif !important;
   font-size: 15px;
 }
+.k_name-logo{
+  font-size: 30px;
+}
+.k_name-logo  a{
+  text-decoration: none;
+  color: #f7f9fa;
+
+}
+
 .k_name{
   font-size: 35px;
   margin-bottom: 80px;
@@ -45,7 +54,9 @@ body {
 .main_logo {
   display: flex;
   align-items: center;
+  font-size: 5px;
 }
+
 .nav-items-left {
   padding-left: 70px;
 }
@@ -151,14 +162,29 @@ margin: 0 15%;
 }
  
 /* start skills  */
+
+#_myskills {
+  margin: 40px;
+}
+.myskills{
+  justify-content: space-between;
+  display: flex;
+  padding: 10px 70px ;
+}
+#_myskills h1{
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .skills{
   width: 500px;
   margin: 60px auto;
   color: rgb(9, 9, 9);
 }
-.skills h1{
+
+/* .skills h1{
   text-align: center;
-}
+} */
 .skills li{
   margin: 20px 0;
 }
@@ -228,7 +254,65 @@ margin: 0 15%;
               width: 75%;
           }
           }
-
+ .d1skills{
+  width: 500px;
+  margin: 60px auto;
+  color: rgb(9, 9, 9);
+}
+.d1skills li{
+  margin: 20px 0;
+}
+.React{
+  width: 90%;
+  animation: Html5 2s;
+}
+.Nest{
+  width: 65%;
+  animation: Css 2s;
+}
+.Typescript{
+  width: 50%;
+  animation: Jquery 2s;
+}
+.Nodejs{
+  width: 75%;
+  animation: javascript 2s;
+}
+@keyframes React{
+  0%{
+    width: 0%;
+  }
+  100%{
+    width: 90%;
+  }
+  }
+  
+  @keyframes Nest{
+    0%{
+        width: 0%;
+    }
+    100%{
+        width: 65%;
+    }
+    }
+  
+    @keyframes Typescript{
+        0%{
+            width: 0%;
+        }
+        100%{
+            width: 50%;
+        }
+        }
+  
+        @keyframes Nodejs{
+            0%{
+                width: 0%;
+            }
+            100%{
+                width: 75%;
+            }
+            }
 /* end skills */
 
 .all {
@@ -266,33 +350,32 @@ background-size: cover; */
   padding-top: 20px;
 }
 .images_Blogs {
+  
   display: flex;
-  padding: 40px;
+  padding: 40px 75px 40px 110px ;
   gap: 2px;
+  flex-wrap: wrap;
+  grid-template-columns: 32% 32% 32%;
 }
 .Box1-Blog {
+  width: 31.5%;
   margin: 10px;
-  display: grid;
   box-shadow: -1px 0 10px rgb(1, 36, 46);
 }
-.Box2-Blog {
-  margin: 10px;
-  display: grid;
-  box-shadow: -10px 0 10px rgb(1, 36, 46);
-}
-.Box3-Blog {
-  margin: 10px;
-  display: grid;
-  box-shadow: -1px 0 10px rgb(1, 36, 46);
+ .Box1-Blog h2{
+  padding: 5px 20px;
+ }
+.Box1-Blog p{
+  padding: 20px;
 }
 .portfolioText_Button {
-  padding: 20px 60px 20px 60px;
+  padding: 20px 100px 20px 150px;
   justify-content: center;
   display: flex;
   justify-content: space-between;
 }
 .Images_Protofile {
-  gap: 13px;
+  gap: 15px;
   display: grid;
   grid-template-columns: 32% 32% 32%;
   padding: 0px 20px 0px 60px;
@@ -306,13 +389,13 @@ background-size: cover; */
 }
 .First-image_Blogs img {
   width: 100%;
+  height: 300px;
 }
-.Second-image_Blogs img {
+/* .First-image_Blogs{
   width: 100%;
-}
-.Third-image_Blogs img {
-  width: 100%;
-}
+  width: 50%;
+} */
+
 .text {
   text-indent: 0px;
   text-align: center;
@@ -348,8 +431,12 @@ background-size: cover; */
 .GetINImage_Text{
 display: flex;
 justify-content: space-between;
-width: 90%;
-/* padding: 10px 50px; */
+width: 80%;
+margin: 0 auto;
+margin-bottom:20px ;
+}
+.GetINImage_Text h2,.GetINImage_Text img{
+  margin-bottom: 10px;
 }
 
 .AllinputGetIN{
@@ -377,7 +464,7 @@ width: 60%;
   }
   .Allinput2 button{
     width: 20%;
-    height: 30px;
+    height: 40px;
   }
   .GetIn_Email_Name {
     display: flex;
@@ -502,6 +589,15 @@ img.avatar {
   height: 100vh;
   z-index: 999;
 }
+.Menu_list a{
+  color: #00050a;
+}
+.Menu_list a:hover{
+  color: #f7f9fa;
+}
+.Menu_list li:hover{
+  background-color: rgb(1, 36, 46);
+}
 .dashboardRight {
   margin-left: 20%;
   padding-bottom: 100px;
@@ -520,13 +616,21 @@ img.avatar {
   margin: 10px 20px;
 }
 .imgBlog {
-  width: 30%;
   height: 100%;
 }
-.imgBlog img,
-.imgBlog_1 {
-  width: 100%;
-  height: 100%;
+
+.imgBlog_1 img{
+  width: 270px;
+  height: 240px;
+  padding: 5px 0px 0px 5px;
+}
+
+
+.BlogTittle{
+  margin-bottom: 15px;
+}
+.Blogcontent{
+  margin-bottom: 20px;
 }
 
 .BlogButton,
@@ -554,7 +658,7 @@ img.avatar {
   border: 1px solid rgb(245, 240, 240);
 }
 .blog_details {
-  padding: 5px 20px;
+  padding: 20px;
 }
 ul {
   padding: unset;
@@ -588,7 +692,7 @@ td {
   justify-content: center;
 }
 .PostStyle {
-  width: 40%;
+  width: 50%;
   /* border: 1px solid black; */
 }
 .Form {
@@ -606,6 +710,7 @@ td {
   border-radius: 10px;
   border: none;
   color: white;
+  height: 40px;
 }
 .Tittles {
   text-align: center;
@@ -617,25 +722,40 @@ td {
   background-color:rgb(1, 36, 46) ;
   border-radius: 5px;
   padding: 10px 6px;
+  height: 40px;
+  width: 100px;
   text-align: center;
   display: inline-block;
   font-size: 12px;
   margin: 2px 2px;
 }
-.deletebutton >button >a{
-  color: rgb(7, 0, 0);
+.deletebutton button{
+background: transparent;
+color: rgb(248, 243, 243);
+border-color: transparent;
+}
+
+.deletebutton a{
+  color: rgb(253, 249, 249);
   text-decoration: none;
 }
 .editbutton{
   background-color:rgb(1, 36, 46) ;
   border-radius: 5px;
   padding: 10px 6px;
+  height: 40px;
+  width: 80px;
   text-align: center;
-  font-size: 12px;
+  font-size: 16px;
   margin: 2px 2px;
 }
+.editbutton button{
+  background: transparent;
+  color: rgb(248, 243, 243);
+  border-color:transparent;
+  }
 .editbutton a{
-  color: rgb(7, 0, 0);
+  color: rgb(248, 243, 243);
   text-decoration: none;
 }
 .cancel_updatebtn{
@@ -649,6 +769,7 @@ background-color: #23304287;
 }
 .table_table_bordered{
   margin: 0 auto;
+  width: 100%;
 }
 
 /* form validation*/
@@ -743,8 +864,12 @@ padding: 0px 20px 0px 40px;
   display: block;
   margin-top: 20px;
 }
-.Box1-Blog,.Box2-Blog,.Box3-Blog{
+.Box1-Blog{
 margin-bottom: 20px;
+}
+p.mybox1,h2.mybox1{
+  margin: 20px !important;
+
 }
 .GetINImage_Text{
   display: block;

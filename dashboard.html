@@ -5,30 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital@1&family=Poppins:wght@200&display=swap" rel="stylesheet">
     <title>Dashboard</title>
 </head>
 <body>
     <div class="dashboardParrent">
     <div class="Dashboard_page">
         <div class="dashboard_navbar">
-            <!-- <div class="main_logo">
-                <div><a href="#home">KI</a></div>
-                <div class="logo">
-                  <img src="img/nav.png" alt="">
-                </div>
-            </div> -->
+            
             <div class="Menu_list">
                 <ul>
                     
-                    <li> <a href="">Blogs</a></li>
-                    <li> <a href="">Query</a></li>
-                    <li> <a href="">New post</a></li>
+                    <li> <a href="#allblog">Blogs</a></li>
+                    <li> <a href="#allqueries">Query</a></li>
+                    <li> <a href="#new_blog">New post</a></li>
                     <li> <a href="index.html">Logout</a></li>
                 </ul>
             </div>
         </div>
         <div  class="dashboardRight">
+           
             <div class="dashheader">
+                <div class="main_logo">
+                    <div class="k_name-logo"><a href="#home_page">KI</a></div>
+                    <div class="logo">
+                      <img src="img/nav.png" alt="">
+                    </div>
+                  </div>
                 <div class="DashTittle"> 
                     <div class="dash_text"> 
                         <p>DASHBOARD</p>
@@ -76,7 +81,7 @@
                     </div>  -->
                 </div> 
 
-               <div class="Allqueries">
+               <div class="Allqueries" id="allqueries">
                 <div class="Tittles">
                     <p>All queries</p>
                 </div>
@@ -87,38 +92,16 @@
                             <th>Email</th>
                             <th>Name</th>
                             <th>Message</th>
-                            <th>action</th>
                         </tr>
                         </thead>
-                         <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <div class="queredit_update">
-                                <button class="querEditbutton" id="querEditbutton">Edit</button>
-                                <button class="querUpdatebutton" id="querUpdatebutton">Update</button>
-                            </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <div class="queredit_update">
-                                    <button class="querEditbutton" id="querEditbutton">Edit</button>
-                                    <button class="querUpdatebutton" id="querUpdatebutton">Update</button>
-                                </div>
-                            </td>
-                        </tr>
+                         <tbody id="querybody">
+                        
                          </tbody>
                     </table>
                     
                    </div>
                </div>
-               <div class="new_blog">
+               <div class="new_blog" id="new_blog">
                 <div class="Tittles">
                     <p> New Post</p>
                 </div>

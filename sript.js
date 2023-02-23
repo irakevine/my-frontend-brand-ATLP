@@ -84,7 +84,7 @@ function emailvalidation() {
         const myname = document.getElementById('name').dataset.check
         const mymessage = document.getElementById('message').dataset.check
         if(myemail == 'valid' && myname == 'valid' && mymessage  =='valid'){
-            // insertquery()
+            insertquery()
             
               document.getElementById('email').value =''
               document.getElementById('name').value =''
@@ -97,78 +97,39 @@ function emailvalidation() {
         }
 
      }) 
-    //     allqueries=[]
-    //  function insertquery(){
-    //    let myObject = {};
-    //    myObject.query_Email= document.getElementById('email').value
-    //    myObject.query_Name = document.getElementById('name').value
-    //    myObject.query_Name = document.getElementById('message').value
-    //    if(localStorage.getItem('queriesList')){
-    //     allqueries=JSON.parse(localStorage.getItem("queriesList"))
+        allqueries=[]
+     function insertquery(){
+       let myObject = {};
+       myObject.query_Email= document.getElementById('email').value
+       myObject.query_Name = document.getElementById('name').value
+       myObject.query_Message = document.getElementById('message').value
+       if(localStorage.getItem('queriesList')){
+        allqueries=JSON.parse(localStorage.getItem("queriesList"))
 
-    //    }
-    //    allqueries.push(myObject)
-    //    localStorage.setItem("queriesList",allqueries)
-    //  }
+       }
+       allqueries.push(myObject)
+       localStorage.setItem("queriesList",JSON.stringify(allqueries))
+     }
 
-
-
-    //  function showData(){
-    //  var queriesList;
-    //  if (localStorage.getItem("queriesList")==null){
-    //     queriesList= [];
-    //  }else{
-    //     queriesList=JSON.parse(localStorage.getItem("queriesList"));
-    //  }
-    //  var html = "";
-    //  queriesList.forEach(function (element,index){
-    //     html += "<tr>";
-    //     html += "<td>" + element.email + "</td>";
-    //     html += "<td>" + element.name + "</td>";
-    //     html += "<td>" + element.message + "</td>";
-    //     html += "<td>" + element.message + "</td>";
-    //     html += '<td><button class="querEditbutton" id="querEditbutton">Edit</button>
-    //     </td>;
-    //     html+="</tr>";
-    //  })
-    // }
-
-    // function deleteQuery(){
-    //     let deletebutton=document.getElementsByClassName('deletebutton');
-    //     let dltbtn=Array.from(deletebutton)
-    //     dltbtn.forEach((el,index)=>{
-    //      el.addEventListener('click',function(){
-             
-    //          if(el.dataset.bindex==index){
-    //              let all=JSON.parse(localStorage.getItem('blogList'))
-                
-    //              all.splice(index,1)
-    //              localStorage.setItem('blogList',JSON.stringify(all))
-    //              displayBlog()
-    //          }
-    //      })
-    //     })
-    //    }
-
-    //    function displayBlog(){
+   
+       function displayBlog(){
 
         
-    //          if (localStorage.getItem("blogList")==null){
-    //             allblogs= [];
-    //          }else{
-    //             allblogs=JSON.parse(localStorage.getItem("blogList"))  
-    //          }
-    //          document.getElementById('allblog').innerHTML=''
-    //          allblogs.forEach(function (k,index){
-    //           document.getElementById('images_Blog').innerHTML+=`
-    //           <div class="Box1-Blog">
-    //         <div class="First-image_Blogs"><img src="${k.query_blogsImgs}" alt="kk"></div>
-    //         <h2>${k.query_blogName}</h2>
-    //         <p>
-    //         ${k.query_blogInf}
-    //         </p>
-    //       </div> `  
-    //          });
-    //      }  
-
-    //      displayBlog()
+             if (localStorage.getItem("blogList")==null){
+                allblogs= [];
+             }else{
+                allblogs=JSON.parse(localStorage.getItem("blogList"))  
+             }
+             document.getElementById('images_Blogs').innerHTML=''
+             allblogs.forEach(function (k,index){
+              document.getElementById('images_Blogs').innerHTML+=`
+              <div class="Box1-Blog">
+            <div class="First-image_Blogs"><img src="${k.query_blogImgs}" alt="kk"></div>
+            <h2 class="mybox1">${k.query_blogName}</h2>
+            <p class="mybox1">
+            ${k.query_blogInf}
+            </p>
+          </div> `  
+             });
+         }  
+         displayBlog()

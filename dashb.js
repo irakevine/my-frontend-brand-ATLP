@@ -145,3 +145,29 @@ function displayBlog(){
      })
     })
    }
+
+
+   function showData(){
+    var queriesList;
+    if (localStorage.getItem("queriesList")==null){
+       queriesList= [];
+    }else{
+       queriesList=JSON.parse(localStorage.getItem("queriesList"));
+    }
+    document.getElementById('querybody').innerHTML =''
+    queriesList.forEach(function (element,index){
+     document.getElementById('querybody').innerHTML+=`
+     <tr>
+     <td>${element.query_Email}</td>
+     <td> ${element.query_Name}</td>
+     <td>${element.query_Message}</td>
+     </tr>
+   
+ `
+
+   })}
+
+   showData()
+
+
+   localStorage.removeItem("queriesList")
