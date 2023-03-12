@@ -78,39 +78,49 @@ function emailvalidation() {
         } 
 
      }
-         document.getElementById('mybtn').addEventListener('click',function(e){
+         document.getElementById('mybtn').addEventListener('click',function (e){
         e.preventDefault()
         const myemail = document.getElementById('email').dataset.check
         const myname = document.getElementById('name').dataset.check
         const mymessage = document.getElementById('message').dataset.check
+        const email= document.getElementById('email').value
+        const name= document.getElementById('name').value
+        const message=document.getElementById('message').value
+
         if(myemail == 'valid' && myname == 'valid' && mymessage  =='valid'){
-            insertquery()
+            const data = {email,name,message}
+        console.log(data)
+        
+        fetch(`http://127.0.0.1:4000/api/v1/query`,{
+            method:"POST",
+           headers:{
+            "Content-Type": "application/json"
             
-              document.getElementById('email').value =''
-              document.getElementById('name').value =''
-              document.getElementById('message').value =''
+
+        },
+        body:JSON.stringify(data)
+        })
+        .then((response) =>{
+         return response.json()
+          
+        })
+        .then((data) => {
+             console.log(data)
+
+        //   alert(data)
+            
+        })
+        .catch(error => alert(error))
+        document.getElementById('email').value=''
+        document.getElementById('name').value=''
+        document.getElementById('message').value=''
         }else{
             emailvalidation()
             namevalidation()
             messagevalidation()
             return
         }
-
-     }) 
-        allqueries=[]
-     function insertquery(){
-       let myObject = {};
-       myObject.query_Email= document.getElementById('email').value
-       myObject.query_Name = document.getElementById('name').value
-       myObject.query_Message = document.getElementById('message').value
-       if(localStorage.getItem('queriesList')){
-        allqueries=JSON.parse(localStorage.getItem("queriesList"))
-
-       }
-       allqueries.push(myObject)
-       localStorage.setItem("queriesList",JSON.stringify(allqueries))
-     }
-
+    })
    
        function displayBlog(){
 

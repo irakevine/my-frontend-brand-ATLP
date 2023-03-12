@@ -12,162 +12,199 @@ const mypic=()=>{
     })
 }
 
-allblogs=[]
-     function insertBlog(){
+      allblogs=[]
+     document.getElementById("btnId").addEventListener("click",
+     function (e){
+        e.preventDefault()
 
-        let myObject = {};
-        myObject.query_blogName= document.getElementById('blogname').value
-        myObject.query_blogInf = document.getElementById('bloginf').value
-        myObject.query_blogImgs = document.getElementById('imgname').src
-        if(localStorage.getItem('blogList')){
-         allblogs=JSON.parse(localStorage.getItem("blogList"))
+        
+       const title= document.getElementById('blogname').value
+       const content= document.getElementById('bloginf').value
+       const imageUrl= document.getElementById('imgname').src
+        
+        // if(localStorage.getItem('blogList')){
+        //  allblogs=JSON.parse(localStorage.getItem("blogList"))
  
-        }
-        allblogs.push(myObject)
-        localStorage.setItem("blogList",JSON.stringify(allblogs))
+        // }
+        // allblogs.push(myObject)
+        // localStorage.setItem("blogList",JSON.stringify(allblogs))
+
+        const data = {title,content,imageUrl};
+        console.log(data)
+        const cookie= document.cookie.split('=')[1]
+        // console.log(cookie)
+        fetch("http://127.0.0.1:4000/api/v1/blogs",{
+            method:"POST",
+           headers:{
+            "Content-Type": "application/json",
+            "credentials":`${cookie}`
+
+        },
+        body:JSON.stringify(data)
+        })
+        .then((response) =>{
+         return response.json()
+          
+        })
+        .then((data) => {
+            // console.log(data)
+
+          alert(data.message)
+            
+        })
+
+        .catch(error => alert(error))
+
+        });
         document.getElementById('blogname').value=''
         document.getElementById('bloginf').value=''
         document.getElementById('imgname').src=''
         document.getElementById('blogimgs').value=''
-     displayBlog()
-
-     }
-     
+    //  displayBlog() 
     //  localStorage.removeItem('blogList')
+
 function displayBlog(){
 
-    allblogs=JSON.parse(localStorage.getItem("blogList"))
+    fetch('http://127.0.0.1:4000/api/v1/blogs',{
+        method :"GET"
+    })
+     
+    .then((response) => response.json())
+    .then((data) => {
+    const blogs = data.data
+     console.log(blogs)
+     document.getElementById('allblog').innerHTML=''
+    blogs.forEach((k,index)=>{
+        document.getElementById('allblog').innerHTML+=`
+              <div class="singleBlog" > 
+              <div class="imgBlog">
+               <div class="imgBlog_1"><img src="${k.imageUrl}" alt=""></div>
+              </div>
+              <div class="blog_details">
+                  <div class="BlogTittle">
+                   <div><p> <b>${k.title}</b></p></div>
     
-         if (localStorage.getItem("blogList")==null){
-            allblogs= [];
-         }else{
-            allblogs=JSON.parse(localStorage.getItem("blogList"))  
-         }
-         document.getElementById('allblog').innerHTML=''
-         allblogs.forEach(function (k,index){
-          document.getElementById('allblog').innerHTML+=`
-          <div class="singleBlog" > 
-          <div class="imgBlog">
-           <div class="imgBlog_1"><img src="${k.query_blogImgs}" alt=""></div>
-          </div>
-          <div class="blog_details">
-              <div class="BlogTittle">
-               <div><p> <b>${k.query_blogName}</b></p></div>
-
+                  </div>
+                  <div class="Blogcontent">
+                   <div>
+                       <p>${k.content}</p>
+                   </div>
+                  </div>
+                  <div class="BlogButton">
+                   <div class="deletebutton" data-bindex=${index} onclick="deleteBlog('${k._id}')">
+                        <button >Delete Item</button>
+                   </div>
+                   <div class="editbutton" data-bindex=${index} onclick="updateBlog('${k._id}')">
+                       <button >Edit</button>  
+                   </div>
+                  </div>
               </div>
-              <div class="Blogcontent">
-               <div>
-                   <p>${k.query_blogInf}</p>
-               </div>
-              </div>
-              <div class="BlogButton">
-               <div class="deletebutton" data-bindex=${index} onclick="deleteBlog()">
-                    <button >Delete Item</button>
-               </div>
-               <div class="editbutton" data-bindex=${index} onclick="updateBlog()">
-                   <button >Edit</button>  
-               </div>
-              </div>
-          </div>
-       </div> `  
-         });
-     }      
+        
+           </div>`
+          
+    })
+})
+    .catch (err => alert(err))
+}
+          
 
      displayBlog()
-     function updateBlog(){
-        document.getElementById('cancel_updatebtn').style.display='flex'
-        document.getElementById('btnId').style.display='none'
+   
+     // update blog 
+     
+     function updateBlog(id){
+     console.log(id)
+
+     const title= document.getElementById('blogname').value
+     const content= document.getElementById('bloginf').value
+     const imageUrl= document.getElementById('imgname').src
+ 
+     const blogUpdated = {title,content,imageUrl};
+     console.log(blogUpdated)
+ 
+      
+        fetch(`http://127.0.0.1:4000/api/v1/blogs/${id}`,{
+        method: "GET"
+        })
+        .then((response) =>{
+         return response.json()
+          
+        })
+        .then(data => {
+        document.getElementById('cancel_updatebtn').style.display='block'
+        document.getElementById('btnId').style.display='none'   
+        document.getElementById('blogname').value=data.data.title
+        document.getElementById('bloginf').value=data.data.content
+         document.getElementById('imgname').src=data.data.imageUrl
+        document.getElementById('Updatebtn').addEventListener('click',function(e){
+            e.preventDefault()
+            const title= document.getElementById('blogname').value
+            const content= document.getElementById('bloginf').value
+            const imageUrl= document.getElementById('imgname').src
         
-        let editbutton=document.getElementsByClassName('editbutton');
-        let editbtn=Array.from(editbutton)
-        editbtn.forEach((el,index)=>{
-         el.addEventListener('click',function(){
-            localStorage.setItem('myid',el.dataset.bindex)
-            location.href="#";
-            location.href="#postId"
-            let myid=localStorage.getItem('myid')
-        if(myid==index){
-           
-            let all=JSON.parse(localStorage.getItem('blogList'))
-            document.getElementById('blogname').value=all[index].query_blogName
-            document.getElementById('bloginf').value=all[index].query_blogInf
-            document.getElementById('imgname').src=all[index].query_blogImgs
-            
-            const Cancel=document.getElementsByClassName('Cancel');
-            const can_btn=Array.from(Cancel);
-            can_btn.forEach((n,index)=>{
-               n.addEventListener('click',function(){
-                  if(n.id == 'Cancelbtn'){
-                    displayBlog();
-                  }
-                  else{
-
-                //    change
-
-                all.splice(myid,1)
-                localStorage.setItem('blogList',JSON.stringify(all))
-                // change
-                   let myObject = {};
-                   myObject.query_blogName= document.getElementById('blogname').value
-                   myObject.query_blogInf = document.getElementById('bloginf').value
-                   myObject.query_blogImgs = document.getElementById('imgname').src
-                  all=JSON.parse(localStorage.getItem('blogList')) 
-                   all.push(myObject);
-                   localStorage.setItem('blogList',JSON.stringify(all))
-                   displayBlog()
-                     document.getElementById('blogname').value=''
-        document.getElementById('bloginf').value=''
-        document.getElementById('imgname').src=''
-        document.getElementById('blogimgs').value='' 
-                  }
-                  document.getElementById('cancel_updatebtn').style.display='none'
-        document.getElementById('btnId').style.display='block'
-               })
+            const blogUpdated = {title,content,imageUrl}; 
+            const tokenAccess = document.cookie.split("=")[1];
+ 
+            fetch(`http://127.0.0.1:4000/api/v1/blogs/${id}`,{
+                method:"PUT",
+                headers:{"Content-Type":"application/json",
+                "credentials":`${tokenAccess}`
+            },body:JSON.stringify(blogUpdated)
             })
+            .then((response)=>{
+                return response.json()
+                
+            })
+            .then((data)=>{
+                console.log(data)
+            })
+        
+        })
+        })
+        .catch(error => alert(error))
+        
+    }
+    
+    const token = document.cookie.split("=")[1];    
+  function deleteBlog(id){
+    console.log(id)
+    fetch(`http://127.0.0.1:4000/api/v1/blogs/${id}`,{
+        method: "DELETE",
+        headers: {
+            "credentials": `${token}`
         }
     })
-        })
-    }
-
-  function deleteBlog(){
-    let deletebutton=document.getElementsByClassName('deletebutton');
-    let dltbtn=Array.from(deletebutton)
-    dltbtn.forEach((el,index)=>{
-     el.addEventListener('click',function(){
-         
-         if(el.dataset.bindex==index){
-             let all=JSON.parse(localStorage.getItem('blogList'))
-            
-             all.splice(index,1)
-             localStorage.setItem('blogList',JSON.stringify(all))
-             displayBlog()
-         }
-     })
-    })
-   }
-
+    .then((response) => response.json())
+  .then((data) => {
+    console.log(data)
+    // alert(data.message)
+  })
+ 
+}
+displayBlog()
 
    function showData(){
-    var queriesList;
-    if (localStorage.getItem("queriesList")==null){
-       queriesList= [];
-    }else{
-       queriesList=JSON.parse(localStorage.getItem("queriesList"));
-    }
-    document.getElementById('querybody').innerHTML =''
-    queriesList.forEach(function (element,index){
-     document.getElementById('querybody').innerHTML+=`
-     <tr>
-     <td>${element.query_Email}</td>
-     <td> ${element.query_Name}</td>
-     <td>${element.query_Message}</td>
-     </tr>
+    fetch('http://127.0.0.1:4000/api/v1/query',{
+        method :"GET"
+    })
+    .then((response) => response.json())
+    .then((data) => {
+    const queries = data.data
+     console.log(queries)
+     document.getElementById('querybody').innerHTML =''
+     queries.forEach(function (element,index){
+        document.getElementById('querybody').innerHTML+=`
+        <tr>
+        <td>${element.email}</td>
+        <td> ${element.name}</td>
+        <td>${element.message}</td>
+        </tr>`
    
- `
-
-   })}
+      })
+    })
+}
 
    showData()
 
 
-   localStorage.removeItem("queriesList")
+//    localStorage.removeItem("queriesList")

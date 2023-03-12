@@ -40,14 +40,34 @@ document.getElementById('btn_logo').addEventListener('click', function (e) {
   e.preventDefault();
   const myemail = document.getElementById('email').dataset.check;
   const mypassword = document.getElementById('password').dataset.check;
+  
+  const myData = {email:email.value,password:password.value}
   if (myemail == 'valid' && mypassword == 'valid') {
-     if(document.getElementById('email').value == localStorage.getItem('myemail') &&
-      document.getElementById('password').value == localStorage.getItem('mypassword'))
-      {
-       window.location.href='dashboard.html'
-           }else{
-             console.log('Hello')
-           }
+    
+     fetch("http://127.0.0.1:4000/api/v1/login",{
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json"
+      },body:JSON.stringify(myData)
+     })
+     .then((response) =>{
+     return response.json()
+      
+     })
+     .then((myData) =>{
+      
+      const token=myData.token
+               if(token){
+                document.cookie=`token=${token}; Path=/;`
+                location.href="./dashboard.html"
+            }
+          else{
+         console.log('wrong credentials')}   
+     })
+     .catch((error)=>{
+      console.log(error)
+     })
+
           
 
   } 
