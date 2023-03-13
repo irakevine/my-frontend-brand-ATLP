@@ -11,6 +11,18 @@ const mypic=()=>{
         myimg.src=reader.result
     })
 }
+const image1= document.getElementById('blogimgs')
+let imageData=null
+image1.addEventListener("change",()=>{
+    const reader = new FileReader();
+
+    reader.readAsDataURL(image1.files[0]);
+    reader.onload = () => {
+        imageData = reader.result;
+        console.log(imageData)
+    };
+})
+
 
       allblogs=[]
      document.getElementById("btnId").addEventListener("click",
@@ -20,7 +32,6 @@ const mypic=()=>{
         
        const title= document.getElementById('blogname').value
        const content= document.getElementById('bloginf').value
-       const imageUrl= document.getElementById('imgname').src
         
         // if(localStorage.getItem('blogList')){
         //  allblogs=JSON.parse(localStorage.getItem("blogList"))
@@ -28,8 +39,8 @@ const mypic=()=>{
         // }
         // allblogs.push(myObject)
         // localStorage.setItem("blogList",JSON.stringify(allblogs))
-
-        const data = {title,content,imageUrl};
+        
+        const data = {title,content,imageUrl:imageData};
         console.log(data)
         const cookie= document.cookie.split('=')[1]
         // console.log(cookie)
@@ -50,7 +61,7 @@ const mypic=()=>{
             // console.log(data)
 
           alert(data.message)
-            
+          window.location.reload()  
         })
 
         .catch(error => alert(error))
@@ -65,7 +76,7 @@ const mypic=()=>{
 
 function displayBlog(){
 
-    fetch('http://127.0.0.1:4000/api/v1/blogs',{
+    fetch(`http://127.0.0.1:4000/api/v1/blogs`,{
         method :"GET"
     })
      
@@ -156,7 +167,8 @@ function displayBlog(){
                 
             })
             .then((data)=>{
-                console.log(data)
+                alert(data.message)
+                window.location.reload()
             })
         
         })
@@ -178,6 +190,7 @@ function displayBlog(){
   .then((data) => {
     console.log(data)
     // alert(data.message)
+    window.location.reload()
   })
  
 }

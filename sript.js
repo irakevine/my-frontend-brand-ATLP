@@ -125,21 +125,126 @@ function emailvalidation() {
        function displayBlog(){
 
         
-             if (localStorage.getItem("blogList")==null){
-                allblogs= [];
-             }else{
-                allblogs=JSON.parse(localStorage.getItem("blogList"))  
-             }
-             document.getElementById('images_Blogs').innerHTML=''
+            //  if (localStorage.getItem("blogList")==null){
+            //     allblogs= [];
+            //  }else{
+            //     allblogs=JSON.parse(localStorage.getItem("blogList"))  
+            //  }
+             const images= document.getElementById('images_Blogs');
+             fetch('http://127.0.0.1:4000/api/v1/blogs',{
+        method :"GET"
+    })
+     
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+        const allblogs = data.data;
+        console.log(allblogs)
              allblogs.forEach(function (k,index){
-              document.getElementById('images_Blogs').innerHTML+=`
-              <div class="Box1-Blog">
-            <div class="First-image_Blogs"><img src="${k.query_blogImgs}" alt="kk"></div>
-            <h2 class="mybox1">${k.query_blogName}</h2>
-            <p class="mybox1">
-            ${k.query_blogInf}
-            </p>
-          </div> `  
-             });
-         }  
+                console.log('heello');
+                const blog_container = document.createElement("div");
+blog_container.classList.add("Box1-Blog");
+
+const imgContainer = document.createElement("div");
+imgContainer.classList.add("First-image_Blogs");
+const img = document.createElement("img");
+img.src =k.imageUrl;
+console.log(img.src);
+imgContainer.appendChild(img);
+
+const blog_name = document.createElement("h2");
+blog_name.classList.add("mybox1");
+blog_name.textContent = k.title;
+
+const blog_info = document.createElement("p");
+blog_info.classList.add("mybox1");
+blog_info.textContent = k.content;
+
+const form = document.createElement("form");
+form.setAttribute("id", "form-comment")
+
+let nameinput = document.createElement("input");
+nameinput.setAttribute("type", "text");
+nameinput.setAttribute("id", "name");
+nameinput.setAttribute("placeholder", "Your name..");
+
+let emailinput = document.createElement("input");
+emailinput.setAttribute("type", "email");
+emailinput.setAttribute("id", "email");
+emailinput.setAttribute("placeholder", "Your Email..");
+
+let commentinput = document.createElement("textarea");
+commentinput.setAttribute("id", "comment");
+commentinput.setAttribute("placeholder", "Write something..");
+
+let submitbutton = document.createElement("input");
+submitbutton.setAttribute("value", "Submit")
+submitbutton.setAttribute("type", "submit");
+submitbutton.setAttribute("id", "submit_comment");
+
+// Attach an event listener to the submit button
+submitbutton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const commentObj = {
+        name: nameinput.value,
+        email: emailinput.value,
+        comment: commentinput.value
+    }
+
+    fetch("http://127.0.0.1:4000/api/v1/blogs",)
+
+    console.log(commentObj, k.imageUrl);
+    // Do something with the name and email values here
+  });
+
+form.appendChild(nameinput);
+form.appendChild(emailinput);
+form.appendChild(commentinput);
+form.appendChild(submitbutton);
+blog_container.appendChild(imgContainer);
+blog_container.appendChild(blog_name);
+blog_container.appendChild(blog_info);
+blog_container.appendChild(form);
+
+images.appendChild(blog_container);
+             
+});
+    });
+         } 
+         
+
+         document.addEventListener("DOMContentLoaded", (e) => {
+            e.preventDefault();
+            const submit_button = document.getElementById("submit_comment");
+            const email = document.getElementById("email");
+            const form = document.getElementById("form-comment")
+            submit_button.addEventListener("click", (e) => {
+                e.preventDefault();
+                console.log("Clicked", email.value);
+            })
+
+         })
+
+         
+         
+         
          displayBlog()
+         // Comment section ith likes pages
+
+         const createComment= (id) => {
+            console.log(id)
+            console.log("Clicked");
+
+               // DOM ELEMENTS
+const name = document.getElementById("name");
+const email = document.getElementById("email");
+const comment = document.getElementById("comment");
+let commentObj = {
+    name: name.value,
+    email: email.value,
+    comment: comment.value
+}
+
+console.log(commentObj);
+         }
+
