@@ -55,14 +55,28 @@ document.getElementById('btn_logo').addEventListener('click', function (e) {
       
      })
      .then((myData) =>{
-      
+      console.log(myData.data.isAdmin);
+      const admin = myData.data.isAdmin;
       const token=myData.token
                if(token){
                 document.cookie=`token=${token}; Path=/;`
-                location.href="./dashboard.html"
             }
           else{
          console.log('wrong credentials')}   
+
+         if(admin) {
+          sessionStorage.setItem("isLoggedIn", true);
+          setTimeout(() => {
+            window.location.href = '/dashboard.html';
+          }, 1500);
+         
+         }
+         else {
+          setTimeout(() => {
+            window.location.href = '/index.html';
+            sessionStorage.setItem("isLoggedIn", false);
+          }, 1600)
+         }
      })
      .catch((error)=>{
       console.log(error)

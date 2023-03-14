@@ -1,3 +1,9 @@
+let session = sessionStorage.getItem("isLoggedIn");
+console.log(session)
+if (session == "false") {
+    window.location.href = '/login.html'
+}
+
 const navimg = (x)=>{
     document.getElementById(x).classList.toggle("hide")
 }
@@ -64,7 +70,8 @@ image1.addEventListener("change",()=>{
           window.location.reload()  
         })
 
-        .catch(error => alert(error))
+        .catch(error => 
+            console.log(error))
 
         });
         document.getElementById('blogname').value=''
@@ -84,10 +91,11 @@ function displayBlog(){
     .then((data) => {
     const blogs = data.data
      console.log(blogs)
-     document.getElementById('allblog').innerHTML=''
+    const allblog = document.getElementById('allblog');
     blogs.forEach((k,index)=>{
-        document.getElementById('allblog').innerHTML+=`
-              <div class="singleBlog" > 
+        const blog_box = document.createElement("div");
+        blog_box.classList.add("singleBlog");
+        blog_box.innerHTML = `
               <div class="imgBlog">
                <div class="imgBlog_1"><img src="${k.imageUrl}" alt=""></div>
               </div>
@@ -108,19 +116,39 @@ function displayBlog(){
                    <div class="editbutton" data-bindex=${index} onclick="updateBlog('${k._id}')">
                        <button >Edit</button>  
                    </div>
+                   <div class="readmorebutton" data-bindex=${index} onclick="readMore('${k._id}')">
+                   <button > Read More </button>
+                   </div>
                   </div>
               </div>
-        
-           </div>`
+             `
+            
+             const blogbutton = document.querySelector(".BlogButton");
+
+        allblog.appendChild(blog_box);
           
     })
 })
-    .catch (err => alert(err))
+    .catch (err => console.log(err))
 }
           
+// REDIRECT TO SINGLE BLOG
 
-     displayBlog()
-   
+
+function readMore(id) {
+
+    localStorage.setItem("blogId", id);
+
+    console.log(id);
+
+    sessionStorage.setItem("isLoggedIn", false)
+
+    setTimeout(() => {
+        window.location.href = "/SingleBlog.html";
+    }, 1000)
+
+}
+
      // update blog 
      
      function updateBlog(id){
@@ -190,7 +218,9 @@ function displayBlog(){
   .then((data) => {
     console.log(data)
     // alert(data.message)
-    window.location.reload()
+    setTimeout(() => {
+        window.location.reload()
+    , 2000})
   })
  
 }
@@ -221,3 +251,14 @@ displayBlog()
 
 
 //    localStorage.removeItem("queriesList")
+
+const logout_btn = document.getElementById("logout-btn");
+
+logout_btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    sessionStorage.setItem("isLoggedIn", false);
+
+    window.location.href = '/index.html'
+
+    console.log(sessionStorage.getItem("isLoggedIn"));
+})

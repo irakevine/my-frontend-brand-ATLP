@@ -331,19 +331,13 @@ margin: 0 15%;
 .portfolio {
   width: 100%;
   position: relative;
-  /* background-image:url('img/backt11.jpg');
-  background-position: fixed;
-background-repeat: no-repeat;
-background-size: cover; */
+ 
 }
 .Blog {
   padding-top: 40px;
   width: 100%;
   position: relative;
-  /* background-image:url('img/backt11.jpg');
-  background-position: fixed;
-background-repeat: no-repeat;
-background-size: cover; */
+ 
 }
 .BlogTexth1 {
   text-align: center;
@@ -356,6 +350,7 @@ background-size: cover; */
   gap: 2px;
   flex-wrap: wrap;
   grid-template-columns: 32% 32% 32%;
+  cursor: pointer;
 }
 .Box1-Blog {
   width: 31.5%;
@@ -379,6 +374,7 @@ background-size: cover; */
   display: grid;
   grid-template-columns: 32% 32% 32%;
   padding: 0px 20px 0px 60px;
+  cursor: pointer;
 }
 
 .Images_Protofile img {
@@ -391,10 +387,7 @@ background-size: cover; */
   width: 100%;
   height: 300px;
 }
-/* .First-image_Blogs{
-  width: 100%;
-  width: 50%;
-} */
+
 
 .text {
   text-indent: 0px;
@@ -403,7 +396,6 @@ background-size: cover; */
 }
 .SKillsh1 {
   padding-top: 40px;
-  /* margin-top: 30px; */
   text-align: center;
 }
 .porth1 {
@@ -491,7 +483,9 @@ width: 60%;
   border-radius: 5px;
   display: center;
 }
-
+.buttonGetINn:hover{
+  background-color:  rgb(53, 112, 100);
+}
 
 /* End GetinTouch */
 
@@ -614,6 +608,10 @@ img.avatar {
   border: 1px solid black;
   height: 100%;
   margin: 10px 20px;
+  cursor: pointer;
+}
+.singleBlog:hover {
+  transform: scale(1.02);
 }
 .imgBlog {
   height: 100%;
@@ -758,6 +756,22 @@ border-color: transparent;
   color: rgb(248, 243, 243);
   text-decoration: none;
 }
+.readmorebutton{
+  background-color:rgb(1, 36, 46) ;
+  border-radius: 5px;
+  padding: 10px 6px;
+  height: 40px;
+  width: 90px;
+  text-align: center;
+  font-size: 16px;
+  margin: 2px 2px; 
+}
+.readmorebutton button{
+  background: transparent;
+  color: rgb(248, 243, 243);
+  border-color:transparent;
+}
+
 .cancel_updatebtn{
   justify-content: space-around;
   display: none;
@@ -843,6 +857,7 @@ label {
   display: inline-block;
 }
 
+
 input[type=submit] {
   background-color:  rgb(1, 36, 46);
   color: white;
@@ -850,11 +865,27 @@ input[type=submit] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  float: right;
+  float: left;
 }
 
+
 input[type=submit]:hover {
-  background-color: #becccf;
+  background-color:  rgb(53, 112, 100);
+  /* color: black; */
+}
+input[type=value] {
+  background-color:  rgb(1, 36, 46);
+  color: white;
+  padding: 12px 20px;
+  width: 30%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+ 
+input[type=value]:hover {
+  background-color:  rgb(53, 112, 100);
   /* color: black; */
 }
 
@@ -883,6 +914,107 @@ input[type=submit]:hover {
   display: table;
   clear: both;
 }
+
+
+/* single blogs page Images*/
+.gallery-container{
+  padding: 40px 80px;
+}
+.grid-item {
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 90%;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+/* Start single blogs page */
+.pageSingleBlog{
+  display: flex;
+  width: 100%;
+  position: relative;
+  background-image: linear-gradient(
+    to bottom right,
+    #b6c5f0,
+    #f7dbded7,
+    #b6c5f0,
+    #617cd437
+  );
+}
+.singleblogs-comment{
+  display: block;
+  margin:0 28%;
+}
+.singleblogs-comment h2{
+  text-align: center;
+  margin-top: 20px;
+}
+.comments {
+  /* border: 2px solid red; */
+  padding: 10px 80px;
+  display: grid;
+  gap: 20px;
+}
+
+/* .comments h1 {
+  text-align: center;
+} */
+
+.comments-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  
+}
+
+.comment-box {
+  border: 1px solid rgb(1, 36, 46);
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px 20px;
+  padding: 10px;
+  margin: 0 auto;
+  width: 300px;
+  min-height: 250px;  
+  padding: 50px;
+  border: 1px solid rgb(1, 36, 46);
+  
+}
+.comment-email,.comment-name,.comment-body{
+  font-size: 20px;
+}
+.comment-heading h6{
+  font-size: 28px;
+  text-align: center;
+  margin:0 auto;
+}
+
+.comment-date {
+  font-size: 12px;
+  font-weight: 200;
+}
+
+
+/*end single blogs page*/
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {

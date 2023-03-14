@@ -1,49 +1,50 @@
 // localStorage.clear()
-const email = document.getElementById('email')
-const name = document.getElementById('name')
+const email = document.getElementById('emailQ')
+const name = document.getElementById('nameQ')
 const message = document.getElementById('message')
 
 function emailvalidation() {
     var validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let result= ''
-    if (email.value.match(validEmail)) {
-       document.getElementById('email_error').style.visibility='hidden'
-       result ='valid email'
-       document.getElementById('email_error').innerText= result
-       document.getElementById('email').dataset.check="valid"
+    if (emailQ.value.match(validEmail)) {
+        console.log((emailQ).value);
+        document.getElementById('email_error').style.visibility='hidden'
+        result ='valid email'
+        document.getElementById('email_error').innerText= result
+        document.getElementById('emailQ').dataset.check="valid"
     } else {
         result ='invalid email'
-       document.getElementById('email_error').innerText= result
-       document.getElementById('email').dataset.check="invalid"
-       document.getElementById('email_error').style.visibility='unset'
+        document.getElementById('email_error').innerText= result
+        document.getElementById('emailQ').dataset.check="invalid"
+        document.getElementById('email_error').style.visibility='unset'
     }
 }
 
      function namevalidation(){
 
-        let validName = ''
+        var validName = ''
+        console.log(document.getElementById('nameQ').value)
        
-        if(document.getElementById('name').value.trim()==''){
+        if(document.getElementById('nameQ').value.trim()==''){
 
             document.getElementById('name_error').style.visibility='unset'
 
             validName = 'field must not be empty'
 
             document.getElementById('name_error').innerText= validName
-            document.getElementById('name').dataset.check="invalid"
+            document.getElementById('nameQ').dataset.check="invalid"
         }else{
-
-            let check= document.getElementById('name').value.split('').length
-            if(check > 8){
+            let check= document.getElementById('nameQ').value.split('').length
+            if(check > 4){
                 document.getElementById('name_error').style.visibility='hidden'
-                document.getElementById('name').dataset.check="valid"
+                document.getElementById('nameQ').dataset.check="valid"
             }else {
                 document.getElementById('name_error').style.visibility='unset'
 
-            validName = 'field must be more than 8 characters'
+            validName = 'field must be more than 4 characters'
 
             document.getElementById('name_error').innerText= validName
-            document.getElementById('name').dataset.check="invalid"
+            document.getElementById('nameQ').dataset.check="invalid"
             }
         } 
 
@@ -80,11 +81,12 @@ function emailvalidation() {
      }
          document.getElementById('mybtn').addEventListener('click',function (e){
         e.preventDefault()
-        const myemail = document.getElementById('email').dataset.check
-        const myname = document.getElementById('name').dataset.check
+        const myemail = document.getElementById('emailQ').dataset.check
+        const myname = document.getElementById('nameQ').dataset.check
         const mymessage = document.getElementById('message').dataset.check
-        const email= document.getElementById('email').value
-        const name= document.getElementById('name').value
+        const email= document.getElementById('emailQ').value
+        console.log(email);
+        const name= document.getElementById('nameQ').value
         const message=document.getElementById('message').value
 
         if(myemail == 'valid' && myname == 'valid' && mymessage  =='valid'){
@@ -111,8 +113,8 @@ function emailvalidation() {
             
         })
         .catch(error => alert(error))
-        document.getElementById('email').value=''
-        document.getElementById('name').value=''
+        document.getElementById('emailQ').value=''
+        document.getElementById('nameQ').value=''
         document.getElementById('message').value=''
         }else{
             emailvalidation()
@@ -137,11 +139,11 @@ function emailvalidation() {
      
     .then((response) => response.json())
     .then((data) => {
-        console.log(data);
+        // console.log(data);
         const allblogs = data.data;
-        console.log(allblogs)
+        // console.log(allblogs)
              allblogs.forEach(function (k,index){
-                console.log('heello');
+                // console.log('heello');
                 const blog_container = document.createElement("div");
 blog_container.classList.add("Box1-Blog");
 
@@ -149,7 +151,7 @@ const imgContainer = document.createElement("div");
 imgContainer.classList.add("First-image_Blogs");
 const img = document.createElement("img");
 img.src =k.imageUrl;
-console.log(img.src);
+// console.log(img.src);
 imgContainer.appendChild(img);
 
 const blog_name = document.createElement("h2");
@@ -182,6 +184,11 @@ submitbutton.setAttribute("value", "Submit")
 submitbutton.setAttribute("type", "submit");
 submitbutton.setAttribute("id", "submit_comment");
 
+let readmorebutton = document.createElement("input");
+readmorebutton.setAttribute("value", "Read More")
+readmorebutton.setAttribute("type", "value");
+readmorebutton.setAttribute("id", "readmorebutton_comment");
+
 // Attach an event listener to the submit button
 submitbutton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -190,17 +197,42 @@ submitbutton.addEventListener("click", (event) => {
         email: emailinput.value,
         comment: commentinput.value
     }
+    fetch(`http://127.0.0.1:4000/api/v1/blogs/${k._id}/comment`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commentObj),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+        
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
+    });
+    console.log(k._id);
+   
 
-    fetch("http://127.0.0.1:4000/api/v1/blogs",)
 
-    console.log(commentObj, k.imageUrl);
+    // console.log(commentObj, k.imageUrl);
     // Do something with the name and email values here
   });
+
+  // NAVIGATE TO SINGLE BLOG PAGE
+  readmorebutton.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    localStorage.setItem("blogId", k._id);
+    window.location.href = '/Singleblog.html'
+  })
 
 form.appendChild(nameinput);
 form.appendChild(emailinput);
 form.appendChild(commentinput);
 form.appendChild(submitbutton);
+form.appendChild(readmorebutton);
 blog_container.appendChild(imgContainer);
 blog_container.appendChild(blog_name);
 blog_container.appendChild(blog_info);
@@ -211,23 +243,7 @@ images.appendChild(blog_container);
 });
     });
          } 
-         
-
-         document.addEventListener("DOMContentLoaded", (e) => {
-            e.preventDefault();
-            const submit_button = document.getElementById("submit_comment");
-            const email = document.getElementById("email");
-            const form = document.getElementById("form-comment")
-            submit_button.addEventListener("click", (e) => {
-                e.preventDefault();
-                console.log("Clicked", email.value);
-            })
-
-         })
-
-         
-         
-         
+        
          displayBlog()
          // Comment section ith likes pages
 
