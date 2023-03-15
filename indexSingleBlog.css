@@ -1,0 +1,66 @@
+.gallery {
+    display: grid;
+    /* grid-template-columns: auto auto auto; */
+    padding: 10px;
+  }
+  
+  .grid-item {
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
+  .gallery{
+    background-image: linear-gradient(
+      to bottom right,
+      #b6c5f0,
+      #f7dbded7,
+      #b6c5f0,
+      #617cd437
+    );
+  }
+  div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+  }
+  
+  div.gallery:hover {
+    border: 1px solid #777;
+  }
+  
+  div.gallery img {
+    width: 100%;
+    height: auto;
+  }
+  
+  div.desc {
+    padding: 15px;
+    text-align: center;
+  }
+  .single_blogs_page{
+    background-image: linear-gradient(
+      to bottom right,
+      #b6c5f0,
+      #f7dbded7,
+      #b6c5f0,
+      #617cd437
+    );
+  }
+  input[type=text],[type=date]{
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid rgb(70, 80, 83);
+    border-radius: 4px;
+  }
+  input[type=email]{
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid rgb(70, 80, 83);
+    border-radius: 4px;
+  }
+  

@@ -16,7 +16,7 @@
     <nav class="flex-container">
       <div class="nav-container-right">
         <div class="main_logo">
-          <!-- <div><a href="#home">KI</a></div> -->
+          <div class="k_name-logo"><a href="#home_page">KI</a></div>
           <div class="logo">
             <img src="img/nav.png" alt="">
           </div>
@@ -26,7 +26,7 @@
           <a href="#about">About</a>
           <a href="#portfolio">Portfolio</a>
           <a href="#blog">Blogs</a>
-          <a href="#myskills">Skills</a>
+          <a href="#_myskills">Skills</a>
         </ul>
       </div>
 
@@ -49,7 +49,7 @@
       
 
       <div>
-        <h1>I am  <span class="k_name">Kevine Iradukunda</span> </h1>
+        <h1>I am  <span class="k_name">Kevine Iradukunda.</span> </h1>
         <p class="hero-intro1"><b>Full Stack Developers and UI DESIGNER.</b></p> 
         <p class="hero-intro">
              I have bachelor’s degree in Computer
@@ -89,9 +89,13 @@
     <!-- End of About Section -->
 
     <!-- start skills -->
-      <div class="skills" id="myskills">
-        
+    <section id="_myskills">
+      
         <h1>My Skills</h1>
+      
+      
+      <div class="myskills">
+      <div class="skills" id="myskills">
         <li>
             <h3>HTML5</h3><span class="bar"><span class="Html5"></span></span>
         </li>
@@ -106,6 +110,24 @@
         </li>
        
     </div>
+    <div class="d1skills" id="myskills">
+        
+      <li>
+          <h3>REACT</h3><span class="bar"><span class="React"></span></span>
+      </li>
+      <li>
+          <h3>NEST</h3><span class="bar"><span class="Nest"></span></span>
+      </li>
+      <li>
+          <h3>TYPESCRTPT</h3><span class="bar"><span class="Typescript"></span></span>
+      </li>
+      <li>
+          <h3>NODEJS</h3><span class="bar"><span class="Nodejs"></span></span>
+      </li>
+     
+  </div>
+</div>
+</section>
      <!-- end skills -->
 
     <!-- start portfolio -->
@@ -138,38 +160,12 @@
         <h1 class="BlogTexth1">The Latest From the Blog</h1>
 
         <div class="images_Blogs" id="images_Blogs">
-          <!-- <div class="Box1-Blog">
-            <div class="First-image_Blogs"><img src="../images/img/b2.webp" alt="kk"></div>
-            <h2>How does it writting influence your personal Brand ?</h2>
-            <p>
-              dLorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non leo odio.
-              Vivamus ultricies sodales conser. Nulla lorem has another style
-              Vivamus ut nuncLorem ipsum dolor sit amet, consectetur adipiscingelit.
-            </p>
-          </div> -->
-          <!-- <div class="Box2-Blog">
-            <div class="Second-image_Blogs"><img src="../images/img/pro12.webp" alt="kk"></div>
-            <h2>How does it writting influence your
-              personal Brand?</h2>
-            <p>
-              dLorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Praesent non leo odio. Vivamus ultricies sodales conser. Nulla lorem has another style Vivamus ut
-              nuncLorem ipsum dolor sit amet,
-              consectetur adipiscingelit. </p>
-          </div>
-          <div class="Box3-Blog">
-            <div class="Third-image_Blogs"><img src="../images/img/B1.jpg" alt="kk"></div>
-            <h2>How does it writting influence your personal Brand?</h2>
-            <p>
-              dLorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Praesent non leo odio. Vivamus ultricies sodales conser. Nulla
-              lorem has another style Vivamus ut nuncLorem ipsum dolor sit amet,
-              consectetur adipiscing elit.
-            </p>
-          </div>
-        </div> -->
+          
+        </div>
+          
       </section>
         <!-- end blogs -->
+
           <!-- start GetinTouch -->
       <section class="GETALLintouch" id="contact">
 
@@ -193,6 +189,7 @@
             <div>
               <img src="img/email.png" alt="" class="emailimg">
               <h2>Email</h2>
+              <p>ikevine2016@gmail.com</p>
             </div>
           </div>
         </div>
@@ -204,7 +201,7 @@
               <div class="GetIn_Email_Name">
                 <div class="myinputs">
                   <div>
-                    <input type="text" data-check="" name="email" id="email" onkeyup="emailvalidation()"
+                    <input type="text" data-check="" name="email" id="emailQ" onkeyup="emailvalidation()"
                       onchange="emailvalidation()" placeholder="Your Email.." required>
 
                   </div>
@@ -220,7 +217,7 @@
 
 
                   <div>
-                    <input type="text" data-check="" name="name" id="name" onkeydown="namevalidation()"
+                    <input type="text" data-check="" name="name" id="nameQ" onkeydown="namevalidation()" onchange="namevalidation()"
                       placeholder="Your name.." required>
                   </div>
 
@@ -263,7 +260,6 @@
    </div>
   </div>
   <script src="sript.js"></script>
-  <script src="dashb.js"></script>
 </body>
 
 </html>

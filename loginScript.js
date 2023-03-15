@@ -40,14 +40,48 @@ document.getElementById('btn_logo').addEventListener('click', function (e) {
   e.preventDefault();
   const myemail = document.getElementById('email').dataset.check;
   const mypassword = document.getElementById('password').dataset.check;
+  
+  const myData = {email:email.value,password:password.value}
   if (myemail == 'valid' && mypassword == 'valid') {
-     if(document.getElementById('email').value == localStorage.getItem('myemail') &&
-      document.getElementById('password').value == localStorage.getItem('mypassword'))
-      {
-       window.location.href='dashboard.html'
-           }else{
-             console.log('Hello')
-           }
+    
+     fetch("http://127.0.0.1:4000/api/v1/login",{
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json"
+      },body:JSON.stringify(myData)
+     })
+     .then((response) =>{
+     return response.json()
+      
+     })
+     .then((myData) =>{
+      console.log(myData.data.isAdmin);
+      const admin = myData.data.isAdmin;
+      const token=myData.token
+               if(token){
+                document.cookie=`token=${token}; Path=/;`
+            }
+          else{
+         console.log('wrong credentials')}   
+
+         if(admin) {
+          sessionStorage.setItem("isLoggedIn", true);
+          setTimeout(() => {
+            window.location.href = '/dashboard.html';
+          }, 1500);
+         
+         }
+         else {
+          setTimeout(() => {
+            window.location.href = '/index.html';
+            sessionStorage.setItem("isLoggedIn", false);
+          }, 1600)
+         }
+     })
+     .catch((error)=>{
+      console.log(error)
+     })
+
           
 
   } 

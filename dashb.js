@@ -1,3 +1,9 @@
+let session = sessionStorage.getItem("isLoggedIn");
+console.log(session)
+if (session == "false") {
+    window.location.href = '/login.html'
+}
+
 const navimg = (x)=>{
     document.getElementById(x).classList.toggle("hide")
 }
@@ -11,137 +17,248 @@ const mypic=()=>{
         myimg.src=reader.result
     })
 }
+const image1= document.getElementById('blogimgs')
+let imageData=null
+image1.addEventListener("change",()=>{
+    const reader = new FileReader();
 
-allblogs=[]
-     function insertBlog(){
+    reader.readAsDataURL(image1.files[0]);
+    reader.onload = () => {
+        imageData = reader.result;
+        console.log(imageData)
+    };
+})
 
-        let myObject = {};
-        myObject.query_blogName= document.getElementById('blogname').value
-        myObject.query_blogInf = document.getElementById('bloginf').value
-        myObject.query_blogImgs = document.getElementById('imgname').src
-        if(localStorage.getItem('blogList')){
-         allblogs=JSON.parse(localStorage.getItem("blogList"))
+
+      allblogs=[]
+     document.getElementById("btnId").addEventListener("click",
+     function (e){
+        e.preventDefault()
+
+        
+       const title= document.getElementById('blogname').value
+       const content= document.getElementById('bloginf').value
+        
+        // if(localStorage.getItem('blogList')){
+        //  allblogs=JSON.parse(localStorage.getItem("blogList"))
  
-        }
-        allblogs.push(myObject)
-        localStorage.setItem("blogList",JSON.stringify(allblogs))
+        // }
+        // allblogs.push(myObject)
+        // localStorage.setItem("blogList",JSON.stringify(allblogs))
+        
+        const data = {title,content,imageUrl:imageData};
+        console.log(data)
+        const cookie= document.cookie.split('=')[1]
+        // console.log(cookie)
+        fetch("http://127.0.0.1:4000/api/v1/blogs",{
+            method:"POST",
+           headers:{
+            "Content-Type": "application/json",
+            "credentials":`${cookie}`
+
+        },
+        body:JSON.stringify(data)
+        })
+        .then((response) =>{
+         return response.json()
+          
+        })
+        .then((data) => {
+            // console.log(data)
+
+          alert(data.message)
+          window.location.reload()  
+        })
+
+        .catch(error => 
+            console.log(error))
+
+        });
         document.getElementById('blogname').value=''
         document.getElementById('bloginf').value=''
         document.getElementById('imgname').src=''
         document.getElementById('blogimgs').value=''
-     displayBlog()
-
-     }
-     
+    //  displayBlog() 
     //  localStorage.removeItem('blogList')
+
 function displayBlog(){
 
-    allblogs=JSON.parse(localStorage.getItem("blogList"))
+    fetch(`http://127.0.0.1:4000/api/v1/blogs`,{
+        method :"GET"
+    })
+     
+    .then((response) => response.json())
+    .then((data) => {
+    const blogs = data.data
+     console.log(blogs)
+    const allblog = document.getElementById('allblog');
+    blogs.forEach((k,index)=>{
+        const blog_box = document.createElement("div");
+        blog_box.classList.add("singleBlog");
+        blog_box.innerHTML = `
+              <div class="imgBlog">
+               <div class="imgBlog_1"><img src="${k.imageUrl}" alt=""></div>
+              </div>
+              <div class="blog_details">
+                  <div class="BlogTittle">
+                   <div><p> <b>${k.title}</b></p></div>
     
-         if (localStorage.getItem("blogList")==null){
-            allblogs= [];
-         }else{
-            allblogs=JSON.parse(localStorage.getItem("blogList"))  
-         }
-         document.getElementById('allblog').innerHTML=''
-         allblogs.forEach(function (k,index){
-          document.getElementById('allblog').innerHTML+=`
-          <div class="singleBlog" > 
-          <div class="imgBlog">
-           <div class="imgBlog_1"><img src="${k.query_blogImgs}" alt=""></div>
-          </div>
-          <div class="blog_details">
-              <div class="BlogTittle">
-               <div><p> <b>${k.query_blogName}</b></p></div>
-
+                  </div>
+                  <div class="Blogcontent">
+                   <div>
+                       <p>${k.content}</p>
+                   </div>
+                  </div>
+                  <div class="BlogButton">
+                   <div class="deletebutton" data-bindex=${index} onclick="deleteBlog('${k._id}')">
+                        <button >Delete Item</button>
+                   </div>
+                   <div class="editbutton" data-bindex=${index} onclick="updateBlog('${k._id}')">
+                       <button >Edit</button>  
+                   </div>
+                   <div class="readmorebutton" data-bindex=${index} onclick="readMore('${k._id}')">
+                   <button > Read More </button>
+                   </div>
+                  </div>
               </div>
-              <div class="Blogcontent">
-               <div>
-                   <p>${k.query_blogInf}</p>
-               </div>
-              </div>
-              <div class="BlogButton">
-               <div class="deletebutton" data-bindex=${index} onclick="deleteBlog()">
-                    <button >Delete Item</button>
-               </div>
-               <div class="editbutton" data-bindex=${index} onclick="updateBlog()">
-                   <button >Edit</button>  
-               </div>
-              </div>
-          </div>
-       </div> `  
-         });
-     }      
-
-     displayBlog()
-     function updateBlog(){
-        document.getElementById('cancel_updatebtn').style.display='flex'
-        document.getElementById('btnId').style.display='none'
-        
-        let editbutton=document.getElementsByClassName('editbutton');
-        let editbtn=Array.from(editbutton)
-        editbtn.forEach((el,index)=>{
-         el.addEventListener('click',function(){
-            localStorage.setItem('myid',el.dataset.bindex)
-            location.href="#";
-            location.href="#postId"
-            let myid=localStorage.getItem('myid')
-        if(myid==index){
-           
-            let all=JSON.parse(localStorage.getItem('blogList'))
-            document.getElementById('blogname').value=all[index].query_blogName
-            document.getElementById('bloginf').value=all[index].query_blogInf
-            document.getElementById('imgname').src=all[index].query_blogImgs
+             `
             
-            const Cancel=document.getElementsByClassName('Cancel');
-            const can_btn=Array.from(Cancel);
-            can_btn.forEach((n,index)=>{
-               n.addEventListener('click',function(){
-                  if(n.id == 'Cancelbtn'){
-                    displayBlog();
-                  }
-                  else{
+             const blogbutton = document.querySelector(".BlogButton");
 
-                //    change
+        allblog.appendChild(blog_box);
+          
+    })
+})
+    .catch (err => console.log(err))
+}
+          
+// REDIRECT TO SINGLE BLOG
 
-                all.splice(myid,1)
-                localStorage.setItem('blogList',JSON.stringify(all))
-                // change
-                   let myObject = {};
-                   myObject.query_blogName= document.getElementById('blogname').value
-                   myObject.query_blogInf = document.getElementById('bloginf').value
-                   myObject.query_blogImgs = document.getElementById('imgname').src
-                  all=JSON.parse(localStorage.getItem('blogList')) 
-                   all.push(myObject);
-                   localStorage.setItem('blogList',JSON.stringify(all))
-                   displayBlog()
-                     document.getElementById('blogname').value=''
-        document.getElementById('bloginf').value=''
-        document.getElementById('imgname').src=''
-        document.getElementById('blogimgs').value='' 
-                  }
-                  document.getElementById('cancel_updatebtn').style.display='none'
-        document.getElementById('btnId').style.display='block'
-               })
+
+function readMore(id) {
+
+    localStorage.setItem("blogId", id);
+
+    console.log(id);
+
+    sessionStorage.setItem("isLoggedIn", false)
+
+    setTimeout(() => {
+        window.location.href = "/SingleBlog.html";
+    }, 1000)
+
+}
+
+     // update blog 
+     
+     function updateBlog(id){
+     console.log(id)
+
+     const title= document.getElementById('blogname').value
+     const content= document.getElementById('bloginf').value
+     const imageUrl= document.getElementById('imgname').src
+ 
+     const blogUpdated = {title,content,imageUrl};
+     console.log(blogUpdated)
+ 
+      
+        fetch(`http://127.0.0.1:4000/api/v1/blogs/${id}`,{
+        method: "GET"
+        })
+        .then((response) =>{
+         return response.json()
+          
+        })
+        .then(data => {
+        document.getElementById('cancel_updatebtn').style.display='block'
+        document.getElementById('btnId').style.display='none'   
+        document.getElementById('blogname').value=data.data.title
+        document.getElementById('bloginf').value=data.data.content
+         document.getElementById('imgname').src=data.data.imageUrl
+        document.getElementById('Updatebtn').addEventListener('click',function(e){
+            e.preventDefault()
+            const title= document.getElementById('blogname').value
+            const content= document.getElementById('bloginf').value
+            const imageUrl= document.getElementById('imgname').src
+        
+            const blogUpdated = {title,content,imageUrl}; 
+            const tokenAccess = document.cookie.split("=")[1];
+ 
+            fetch(`http://127.0.0.1:4000/api/v1/blogs/${id}`,{
+                method:"PUT",
+                headers:{"Content-Type":"application/json",
+                "credentials":`${tokenAccess}`
+            },body:JSON.stringify(blogUpdated)
             })
+            .then((response)=>{
+                return response.json()
+                
+            })
+            .then((data)=>{
+                alert(data.message)
+                window.location.reload()
+            })
+        
+        })
+        })
+        .catch(error => alert(error))
+        
+    }
+    
+    const token = document.cookie.split("=")[1];    
+  function deleteBlog(id){
+    console.log(id)
+    fetch(`http://127.0.0.1:4000/api/v1/blogs/${id}`,{
+        method: "DELETE",
+        headers: {
+            "credentials": `${token}`
         }
     })
-        })
-    }
+    .then((response) => response.json())
+  .then((data) => {
+    console.log(data)
+    // alert(data.message)
+    setTimeout(() => {
+        window.location.reload()
+    , 2000})
+  })
+ 
+}
+displayBlog()
 
-  function deleteBlog(){
-    let deletebutton=document.getElementsByClassName('deletebutton');
-    let dltbtn=Array.from(deletebutton)
-    dltbtn.forEach((el,index)=>{
-     el.addEventListener('click',function(){
-         
-         if(el.dataset.bindex==index){
-             let all=JSON.parse(localStorage.getItem('blogList'))
-            
-             all.splice(index,1)
-             localStorage.setItem('blogList',JSON.stringify(all))
-             displayBlog()
-         }
-     })
+   function showData(){
+    fetch('http://127.0.0.1:4000/api/v1/query',{
+        method :"GET"
     })
-   }
+    .then((response) => response.json())
+    .then((data) => {
+    const queries = data.data
+     console.log(queries)
+     document.getElementById('querybody').innerHTML =''
+     queries.forEach(function (element,index){
+        document.getElementById('querybody').innerHTML+=`
+        <tr>
+        <td>${element.email}</td>
+        <td> ${element.name}</td>
+        <td>${element.message}</td>
+        </tr>`
+   
+      })
+    })
+}
+
+   showData()
+
+
+//    localStorage.removeItem("queriesList")
+
+const logout_btn = document.getElementById("logout-btn");
+
+logout_btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    sessionStorage.setItem("isLoggedIn", false);
+
+    window.location.href = '/index.html'
+
+    console.log(sessionStorage.getItem("isLoggedIn"));
+})
