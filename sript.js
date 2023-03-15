@@ -1,3 +1,15 @@
+function checkLogin (){
+    let cookie = document.cookie.split("=")[1]
+    if(cookie){
+    document.getElementById('loginId').innerHTML+=`
+    <a href="login.html">Logout</a>`
+    }else{
+     document.getElementById('loginId').innerHTML+=`
+    <a href="login.html">Login</a>`
+    }
+} 
+checkLogin()
+
 // localStorage.clear()
 const email = document.getElementById('emailQ')
 const name = document.getElementById('nameQ')
