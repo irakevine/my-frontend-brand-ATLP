@@ -7,7 +7,7 @@ const comments_container = document.querySelector(".comments-container");
 
 const gallery = document.querySelector(".gallery");
 
-fetch(`http://127.0.0.1:4000/api/v1/blogs/${blogId}`, {
+fetch(`https://my-brand-backend-lmiq.onrender.com/api/v1/blogs/${blogId}`, {
     method: "GET"
 })
 .then((res) => res.json())

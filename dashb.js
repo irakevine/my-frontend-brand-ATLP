@@ -50,7 +50,7 @@ image1.addEventListener("change",()=>{
         console.log(data)
         const cookie= document.cookie.split('=')[1]
         // console.log(cookie)
-        fetch("http://127.0.0.1:4000/api/v1/blogs",{
+        fetch("https://my-brand-backend-lmiq.onrender.com/api/v1/blogs",{
             method:"POST",
            headers:{
             "Content-Type": "application/json",
@@ -83,7 +83,7 @@ image1.addEventListener("change",()=>{
 
 function displayBlog(){
 
-    fetch(`http://127.0.0.1:4000/api/v1/blogs`,{
+    fetch(`https://my-brand-backend-lmiq.onrender.com/api/v1/blogs`,{
         method :"GET"
     })
      
@@ -162,7 +162,7 @@ function readMore(id) {
      console.log(blogUpdated)
  
       
-        fetch(`http://127.0.0.1:4000/api/v1/blogs/${id}`,{
+        fetch(`https://my-brand-backend-lmiq.onrender.com/api/v1/blogs/${id}`,{
         method: "GET"
         })
         .then((response) =>{
@@ -184,7 +184,7 @@ function readMore(id) {
             const blogUpdated = {title,content,imageUrl}; 
             const tokenAccess = document.cookie.split("=")[1];
  
-            fetch(`http://127.0.0.1:4000/api/v1/blogs/${id}`,{
+            fetch(`https://my-brand-backend-lmiq.onrender.com/api/v1/blogs/${id}`,{
                 method:"PUT",
                 headers:{"Content-Type":"application/json",
                 "credentials":`${tokenAccess}`
@@ -208,7 +208,7 @@ function readMore(id) {
     const token = document.cookie.split("=")[1];    
   function deleteBlog(id){
     console.log(id)
-    fetch(`http://127.0.0.1:4000/api/v1/blogs/${id}`,{
+    fetch(`https://my-brand-backend-lmiq.onrender.com/api/v1/blogs/${id}`,{
         method: "DELETE",
         headers: {
             "credentials": `${token}`
@@ -227,7 +227,7 @@ function readMore(id) {
 displayBlog()
 
    function showData(){
-    fetch('http://127.0.0.1:4000/api/v1/query',{
+    fetch('https://my-brand-backend-lmiq.onrender.com/api/v1/query',{
         method :"GET"
     })
     .then((response) => response.json())

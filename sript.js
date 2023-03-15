@@ -105,7 +105,7 @@ function emailvalidation() {
             const data = {email,name,message}
         console.log(data)
         
-        fetch(`http://127.0.0.1:4000/api/v1/query`,{
+        fetch(`https://my-brand-backend-lmiq.onrender.com/api/v1/query`,{
             method:"POST",
            headers:{
             "Content-Type": "application/json"
@@ -145,7 +145,7 @@ function emailvalidation() {
             //     allblogs=JSON.parse(localStorage.getItem("blogList"))  
             //  }
              const images= document.getElementById('images_Blogs');
-             fetch('http://127.0.0.1:4000/api/v1/blogs',{
+             fetch('https://my-brand-backend-lmiq.onrender.com/api/v1/blogs',{
         method :"GET"
     })
      
@@ -209,7 +209,7 @@ submitbutton.addEventListener("click", (event) => {
         email: emailinput.value,
         comment: commentinput.value
     }
-    fetch(`http://127.0.0.1:4000/api/v1/blogs/${k._id}/comment`, {
+    fetch(`https://my-brand-backend-lmiq.onrender.com/api/v1/blogs/${k._id}/comment`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

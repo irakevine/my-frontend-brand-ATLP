@@ -44,7 +44,7 @@ document.getElementById('btn_logo').addEventListener('click', function (e) {
   const myData = {email:email.value,password:password.value}
   if (myemail == 'valid' && mypassword == 'valid') {
     
-     fetch("http://127.0.0.1:4000/api/v1/login",{
+     fetch("https://my-brand-backend-lmiq.onrender.com/api/v1/login",{
       method:"POST",
       headers:{
         "Content-Type": "application/json"
